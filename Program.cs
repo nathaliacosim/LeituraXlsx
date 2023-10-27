@@ -1,10 +1,27 @@
 ﻿using LeituraArquivo.Controller;
+using System;
+using System.IO;
+using System.Linq;
 
 public class Program
 {
-    private static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
-        LeituraController leituraController = new LeituraController();
-        await leituraController.Ler();
+        try
+        {
+            var leituraController = new LeituraController();
+        }
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}. Certifique-se de que o arquivo Excel existe no caminho especificado.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ocorreu um erro inesperado: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("O programa foi encerrado.");
+        }
     }
 }
